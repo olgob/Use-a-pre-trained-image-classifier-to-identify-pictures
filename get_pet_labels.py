@@ -46,13 +46,17 @@ def get_pet_labels(image_dir):
     filenames = listdir(image_dir)
  
     for filename in filenames:
-        # if the filename is already in the dictionary
-        if filename in results_dic:
-            pass
-        # if the filename is not yet in the dictionary, add it    
+        # if filename is a hidden file (begin by ".") then ignore it
+        if filename.startswith("."):
+            continue
         else:
-            pet_image_label = " ".join(filename.lower().strip().split('_')[0:-1])
-            results_dic[filename] = [pet_image_label]
+            # if the filename is already in the dictionary
+            if filename in results_dic:
+                pass
+            # if the filename is not yet in the dictionary, add it    
+            else:
+                pet_image_label = " ".join(filename.lower().strip().split('_')[0:-1])
+                results_dic[filename] = [pet_image_label]
     # Replace None with the results_dic dictionary that you created with this
     # function
     return results_dic
